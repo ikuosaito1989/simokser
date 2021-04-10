@@ -1,2 +1,66 @@
 # simokser
+
 This is a countermeasure to the problem of JSON Server's json becoming large.
+You can easily create them by simply placing the json for each API in the directory.
+
+## Getting started
+
+Create a json file named after the path in the fixtures directory
+
+```json
+// fixtures/posts.json
+[
+  {
+    "id": 1,
+    "title": "json-server",
+    "author": "typicode"
+  }
+]
+```
+
+Start Mock Server
+
+```bash
+yarn mock-server
+```
+
+Now if you go to http://localhost:3000/posts/1, you'll get
+
+```json
+{
+  "id": 1,
+  "title": "json-server",
+  "author": "typicode"
+}
+```
+
+Accessing error will return a 500 error.
+
+```json
+{
+  "error": "error message here"
+}
+```
+
+Add custom routes
+
+```json
+// Create a routes.json file. Pay attention to start every route with /.
+{
+  "/api/*": "/$1",
+  "/:resource/:id/show": "/:resource/:id",
+  "/posts/:category": "/posts?category=:category",
+  "/articles\\?id=:id": "/posts/:id"
+}
+```
+
+CLI usage
+
+```bash
+Options:
+  --port, -p Set port [default: 3000]
+```
+
+## Links
+
+https://github.com/typicode/json-server

@@ -36,7 +36,7 @@ router.render = (req, res) => {
  * Get the result of merging all json objects in the fixtures directory.
  */
 function getAllResponses() {
-  const targetDir = path.join(__dirname, 'fixtures')
+  const targetDir = 'fixtures'
   const directories = fs.readdirSync(targetDir)
   let results = {}
   for (let i = 0; i < directories.length; i++) {

@@ -5,7 +5,7 @@
     "prettier": "prettier --write src/**/*.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "simokser": "node src/server.js"
+    "simokser": "node src/index.js"
   },
   "devDependencies": {
     "chalk": "^4.1.0",

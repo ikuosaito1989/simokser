@@ -23,7 +23,7 @@ Start Mock Server
 ```bash
 $ yarn mock-server
 
-  \{^_^}/ hi!
+  simokser:0.0.1
 
   Resources
   http://localhost:3000/comments

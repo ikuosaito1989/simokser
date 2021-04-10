@@ -40,7 +40,5 @@ router.render = (req, res) => {
     return
   }
 
-  res.jsonp({
-    body: res.locals.data,
-  })
+  res.jsonp(res.locals.data)
 }

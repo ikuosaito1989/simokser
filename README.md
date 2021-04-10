@@ -21,7 +21,19 @@ Create a json file named after the path in the fixtures directory
 Start Mock Server
 
 ```bash
-yarn mock-server
+$ yarn mock-server
+
+  \{^_^}/ hi!
+
+  Resources
+  http://localhost:3000/comments
+  http://localhost:3000/posts
+
+  Other routes
+  /v1/* -> /$1
+
+  simokser is running
+
 ```
 
 Now if you go to http://localhost:3000/posts/1, you'll get

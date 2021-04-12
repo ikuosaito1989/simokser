@@ -66,6 +66,31 @@ Add custom routes
 }
 ```
 
+Add error routes
+
+```json
+// Create a errors.json file. Pay attention to start every route with /.
+{
+  "/v1/posts/6": {
+    "statusCode": 500,
+    "message": "This API is buggy! Please fix it immediately!."
+  },
+  "/bad_request": {
+    "statusCode": 400,
+    "message": "bad request."
+  }
+}
+```
+
+Now if you go to http://localhost:3000/posts/1, you'll get
+
+```json
+// statusCode: 500
+{
+  "error": "This API is buggy! Please fix it immediately!."
+}
+```
+
 CLI usage
 
 ```bash

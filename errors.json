@@ -1,0 +1,14 @@
+{
+  "/v1/posts/6": {
+    "statusCode": 500,
+    "message": "This API is buggy! Please fix it immediately!."
+  },
+  "/bad_request": {
+    "statusCode": 400,
+    "message": "bad request."
+  },
+  "/server_error": {
+    "statusCode": 500,
+    "message": "an error occurred."
+  }
+}

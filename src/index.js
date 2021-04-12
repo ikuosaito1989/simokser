@@ -5,6 +5,7 @@ const chalk = require('chalk')
 const utils = require('./utils')
 const libs = require('./libs')
 const package = require('../package.json')
+const errors = require('../errors.json')
 
 utils.log()
 utils.log(chalk.cyan(`${package.name}:${package.version}`))
@@ -26,6 +27,12 @@ if (fs.existsSync(path.join(__dirname, 'routes.json'))) {
   }
 }
 
+utils.log()
+utils.log(chalk.bold('Error routes'))
+Object.keys(errors).forEach((path) => {
+  utils.log(`${path} -> ${errors[path].statusCode}`)
+})
+
 server.use(router)
 server.listen(port, () => {
   utils.log()
@@ -33,9 +40,12 @@ server.listen(port, () => {
 })
 
 router.render = (req, res) => {
-  if (req.url.includes('error')) {
-    res.status(500).jsonp({
-      error: 'error message here',
+  const path = Object.keys(errors).find((path) =>
+    req._parsedOriginalUrl.path.includes(path),
+  )
+  if (path) {
+    res.status(+errors[path].statusCode).jsonp({
+      error: errors[path].message,
     })
     return
   }

@@ -1,7 +1,6 @@
 # simokser
 
-This is a countermeasure to the problem of JSON Server's json becoming large.
-You can easily create them by simply placing the json for each API in the directory.
+Json-server is now more user-friendly. The first is to create one Json file for one API, which prevents the json file from getting bloated. The second is to create an API for errors by simply changing the json file.
 
 ## Getting started
 

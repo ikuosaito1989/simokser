@@ -45,14 +45,6 @@ Now if you go to http://localhost:3000/posts/1, you'll get
 }
 ```
 
-Accessing error will return a 500 error.
-
-```json
-{
-  "error": "error message here"
-}
-```
-
 Add custom routes
 
 ```json
@@ -81,7 +73,7 @@ Add error routes
 }
 ```
 
-Now if you go to http://localhost:3000/posts/1, you'll get
+Now if you go to http://localhost:3000/posts/6, you'll get
 
 ```json
 // statusCode: 500

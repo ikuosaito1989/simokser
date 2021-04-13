@@ -1,6 +1,7 @@
 const utils = require('./utils')
 const package = require('../package.json')
 const nodemon = require('nodemon')
+const chalk = require('chalk')
 
 nodemon({
   script: 'src/index.js',
@@ -9,7 +10,8 @@ nodemon({
 
 nodemon
   .on('start', () => {
-    utils.log(`${package.name} has started`)
+    utils.log()
+    utils.log(chalk.cyan(`${package.name} has started`))
   })
   .on('quit', () => {
     utils.log(`${package.name} has quit`)

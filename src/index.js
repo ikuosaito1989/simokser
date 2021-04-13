@@ -7,9 +7,6 @@ const libs = require('./libs')
 const package = require('../package.json')
 const errors = require('../errors.json')
 
-utils.log()
-utils.log(chalk.cyan(`${package.name}:${package.version}`))
-
 const port = utils.toPort(process.argv)
 const server = jsonServer.create()
 const router = jsonServer.router(libs.getAllResponses(port))

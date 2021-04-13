@@ -24,9 +24,11 @@ Create a json file named after the path in the fixtures directory
 Start Mock Server
 
 ```bash
-$ yarn mock-server
+$ yarn simokser
 
-  simokser:0.0.1
+$ node src/start.js
+
+  simokser has started
 
   Resources
   http://localhost:3000/comments
@@ -34,6 +36,11 @@ $ yarn mock-server
 
   Other routes
   /v1/* -> /$1
+
+  Error routes
+  /v1/posts/6 -> 500
+  /bad_request -> 400
+  /server_error -> 500
 
   simokser is running
 

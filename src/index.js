@@ -37,6 +37,7 @@ server.use(router)
 server.listen(port, () => {
   utils.log()
   utils.log(chalk.gray(`${package.name} is running`))
+  utils.log()
 })
 
 router.render = (req, res) => {

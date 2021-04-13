@@ -1,6 +1,10 @@
 # simokser
 
-Json-server is now more user-friendly. The first is to create one Json file for one API, which prevents the json file from getting bloated. The second is to create an API for errors by simply changing the json file.
+Json-server is now more user-friendly.
+
+- One Json file is created for one API, which prevents the json file from becoming bloated.
+- Error APIs can be created by simply changing the json file.
+- The mock server can be restarted when the json file is changed.
 
 ## Getting started
 

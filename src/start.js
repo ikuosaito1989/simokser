@@ -2,9 +2,11 @@ const utils = require('./utils')
 const package = require('../package.json')
 const nodemon = require('nodemon')
 const chalk = require('chalk')
+const port = utils.toPort(process.argv)
 
 nodemon({
   script: 'src/index.js',
+  args: [`--p=${port}`],
   ext: 'json',
 })
 

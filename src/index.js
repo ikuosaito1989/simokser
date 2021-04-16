@@ -5,7 +5,7 @@ const chalk = require('chalk')
 const utils = require('./utils')
 const libs = require('./libs')
 const package = require('../package.json')
-const errors = require('../errors.json')
+const custom = require('../custom.json')
 
 const port = utils.toPort(process.argv)
 const server = jsonServer.create()
@@ -25,9 +25,15 @@ if (fs.existsSync(path.join(__dirname, 'routes.json'))) {
 }
 
 utils.log()
-utils.log(chalk.bold('Error routes'))
-Object.keys(errors).forEach((path) => {
-  utils.log(`${path} -> ${errors[path].statusCode}`)
+utils.log(chalk.bold('Custom routes'))
+
+const maxKeyLength = Math.max(...Object.keys(custom).map((v) => v.length))
+Object.keys(custom).forEach((path) => {
+  utils.log(
+    `${path.padEnd(maxKeyLength)} | ${utils.toProperties(custom[path], [
+      'message',
+    ])} `,
+  )
 })
 
 server.use(router)
@@ -38,15 +44,24 @@ server.listen(port, () => {
 })
 
 router.render = (req, res) => {
-  const path = Object.keys(errors).find((path) =>
+  const path = Object.keys(custom).find((path) =>
     req._parsedOriginalUrl.path.includes(path),
   )
-  if (path) {
-    res.status(+errors[path].statusCode).jsonp({
-      error: errors[path].message,
-    })
-    return
-  }
 
-  res.jsonp(res.locals.data)
+  const delay = +(custom[path].delay || 0)
+
+  setTimeout(() => {
+    if (path) {
+      const statusCode = +custom[path].statusCode
+      const response =
+        statusCode > 399
+          ? { error: custom[path].message }
+          : { message: custom[path].message }
+
+      res.status(+custom[path].statusCode).jsonp(response)
+      return
+    }
+
+    res.jsonp(res.locals.data)
+  }, delay)
 }

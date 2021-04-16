@@ -26,21 +26,19 @@ Start Mock Server
 ```bash
 $ yarn simokser
 
-$ node src/start.js
-
   simokser has started
 
   Resources
-  http://localhost:3000/comments
-  http://localhost:3000/posts
+  http://localhost:4200/comments
+  http://localhost:4200/posts
 
   Other routes
   /v1/* -> /$1
 
-  Error routes
-  /v1/posts/6 -> 500
-  /bad_request -> 400
-  /server_error -> 500
+  Custom routes
+  /bad_request  | StatusCode:400
+  /server_error | StatusCode:500
+  /delay        | StatusCode:200, Delay:3000
 
   simokser is running
 
@@ -68,10 +66,18 @@ Add custom routes
 }
 ```
 
-Add error routes
+By modifying custom.json, you can create an error API or an API to delay requests.
+
+- Properties
+
+  | Property   | Description                                     | Required |
+  | ---------- | ----------------------------------------------- | -------- |
+  | statusCode | HTTP Status Code                                | true     |
+  | message    | Response message                                | true     |
+  | delay      | The delay duration in milliseconds （default 0) | false    |
 
 ```json
-// Create a errors.json file. Pay attention to start every route with /.
+// Create a custom.json file. Pay attention to start every route with /.
 {
   "/v1/posts/6": {
     "statusCode": 500,
@@ -80,6 +86,11 @@ Add error routes
   "/bad_request": {
     "statusCode": 400,
     "message": "bad request."
+  },
+  "/delay": {
+    "statusCode": 200,
+    "delay": 3000,
+    "message": "This API has a 3000ms delay."
   }
 }
 ```

@@ -31,7 +31,7 @@ const maxKeyLength = Math.max(...Object.keys(custom).map((v) => v.length))
 Object.keys(custom).forEach((path) => {
   utils.log(
     `${path.padEnd(maxKeyLength)} | ${utils.toProperties(custom[path], [
-      'message',
+      'body',
     ])} `,
   )
 })
@@ -52,13 +52,7 @@ router.render = (req, res) => {
 
   setTimeout(() => {
     if (path) {
-      const statusCode = +custom[path].statusCode
-      const response =
-        statusCode > 399
-          ? { error: custom[path].message }
-          : { message: custom[path].message }
-
-      res.status(+custom[path].statusCode).jsonp(response)
+      res.status(+custom[path].status).jsonp(custom[path].body)
       return
     }
 

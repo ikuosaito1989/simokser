@@ -1,15 +1,22 @@
 {
   "/bad_request": {
-    "statusCode": 400,
-    "message": "bad request."
+    "status": 400,
+    "body": {
+      "status": 400,
+      "error": "bad request."
+    }
   },
   "/server_error": {
-    "statusCode": 500,
-    "message": "an error occurred."
+    "status": 500,
+    "body": {
+      "error": "an error occurred."
+    }
   },
   "/delay": {
-    "statusCode": 200,
+    "status": 200,
     "delay": 3000,
-    "message": "This API has a 3000ms delay."
+    "body": {
+      "message": "This API has a 3000ms delay."
+    }
   }
 }

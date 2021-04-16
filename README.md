@@ -36,9 +36,9 @@ $ yarn simokser
   /v1/* -> /$1
 
   Custom routes
-  /bad_request  | StatusCode:400
-  /server_error | StatusCode:500
-  /delay        | StatusCode:200, Delay:3000
+  /bad_request  | Status:400
+  /server_error | Status:500
+  /delay        | Status:200, Delay:3000
 
   simokser is running
 
@@ -70,27 +70,34 @@ By modifying custom.json, you can create an error API or an API to delay request
 
 - Properties
 
-  | Property   | Description                                     | Required |
-  | ---------- | ----------------------------------------------- | -------- |
-  | statusCode | HTTP Status Code                                | true     |
-  | message    | Response message                                | true     |
-  | delay      | The delay duration in milliseconds （default 0) | false    |
+  | Property | Description                                     | Required |
+  | -------- | ----------------------------------------------- | -------- |
+  | status   | HTTP Status Code                                | true     |
+  | body     | Response body                                   | true     |
+  | delay    | The delay duration in milliseconds （default 0) | false    |
 
 ```json
 // Create a custom.json file. Pay attention to start every route with /.
 {
-  "/v1/posts/6": {
-    "statusCode": 500,
-    "message": "This API is buggy! Please fix it immediately!."
-  },
   "/bad_request": {
-    "statusCode": 400,
-    "message": "bad request."
+    "status": 400,
+    "body": {
+      "status": 400,
+      "error": "bad request."
+    }
+  },
+  "/server_error": {
+    "status": 500,
+    "body": {
+      "error": "an error occurred."
+    }
   },
   "/delay": {
-    "statusCode": 200,
+    "status": 200,
     "delay": 3000,
-    "message": "This API has a 3000ms delay."
+    "body": {
+      "message": "This API has a 3000ms delay."
+    }
   }
 }
 ```
@@ -98,7 +105,7 @@ By modifying custom.json, you can create an error API or an API to delay request
 Now if you go to http://localhost:3000/posts/6, you'll get
 
 ```json
-// statusCode: 500
+// status: 500
 {
   "error": "This API is buggy! Please fix it immediately!."
 }

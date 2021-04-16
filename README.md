@@ -102,12 +102,13 @@ By modifying custom.json, you can create an error API or an API to delay request
 }
 ```
 
-Now if you go to http://localhost:3000/posts/6, you'll get
+Now if you go to http://localhost:3000/bad_request, you'll get
 
 ```json
-// status: 500
+// status: 400
 {
-  "error": "This API is buggy! Please fix it immediately!."
+  "status": 400,
+  "error": "bad request."
 }
 ```
 

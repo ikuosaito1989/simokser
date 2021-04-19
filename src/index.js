@@ -48,7 +48,7 @@ router.render = (req, res) => {
     req._parsedOriginalUrl.path.includes(path),
   )
 
-  const delay = +(custom[path].delay || 0)
+  const delay = +((custom[path] && custom[path].delay) || 0)
 
   setTimeout(() => {
     if (path) {
